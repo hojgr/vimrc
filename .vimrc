@@ -16,6 +16,8 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+let NERDTreeIgnore = ['\.pyc$']
+
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tomasr/molokai'
@@ -32,6 +34,10 @@ Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-rails'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'wavded/vim-stylus'
+Plugin 'janiczek/vim-latte'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/closetag.vim'
+Plugin 'kchmck/vim-coffee-script'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -66,3 +72,9 @@ nmap <S-Tab> <<
 " for insert mode
 imap <S-Tab> <Esc><<i
 
+nmap ; :CtrlPBuffer<CR>
+
+map <F8> : !gcc % && ./a.out <CR>
+
+au BufNewFile,BufRead *.css.ejs set filetype=css
+au BufNewFile,BufRead *.js.ejs set filetype=javascript
