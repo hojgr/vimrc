@@ -1,80 +1,86 @@
+" Set MapLeader
 let mapleader=","
 
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
-
-let $XIKI_DIR = "~/xiki"
-source ~/xiki/etc/vim/xiki.vim
+set t_Co=256
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-let NERDTreeIgnore = ['\.pyc$']
+Plug 'scrooloose/syntastic'     " Syntax checker, PHPCS, PHPMD
+Plug 'tomasr/molokai'           " Colorscheme
+Plug 'kien/ctrlp.vim'           " CtrlP File finder
+Plug 'scrooloose/nerdtree'      " NERDTree
+Plug 'bling/vim-airline'        " Status line
+Plug 'tpope/vim-fugitive'       " Git Suppoer
+Plug 'Lokaltog/vim-easymotion'  " Easymotion (,,move)
+Plug 'mileszs/ack.vim'
+Plug 'mhinz/vim-signify'
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tomasr/molokai'
-Plugin 'msanders/snipmate.vim'
-Plugin 'xsbeats/vim-blade'
-Plugin 'kien/ctrlp.vim'
-Bundle 'jlanzarotta/bufexplorer'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'
-Plugin 'mattn/emmet-vim'
-Plugin 'tpope/vim-rails'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'wavded/vim-stylus'
-Plugin 'janiczek/vim-latte'
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-scripts/closetag.vim'
-Plugin 'kchmck/vim-coffee-script'
+" Plugins for Snippets and automatic autocompletion
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
+" Enable syntax highlight
 syntax on
 
+" Show status bar at all times
 set laststatus=2
+
+" Set color scheme
 colorscheme molokai
-" line numbers
+
+" Show line numbers
 set number
 
-" use spaces
+" Intend with 4 spaces
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
-inoremap <F9> <C-O>za
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-vnoremap <F9> zf
-
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-j> :wincmd j<CR>
+" Jump between windows with CTRL+hjkl
 nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-k> :wincmd k<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 
-nmap <leader>ne :NERDTree<cr>
+" Map NERDTree
+nmap <leader>ne :NERDTree<CR>
 
-" for command mode
+" Map Shift-TAB for reverse intendation
 nmap <S-Tab> <<
-" for insert mode
 imap <S-Tab> <Esc><<i
 
+" Map ; for CtrlPBuffer
 nmap ; :CtrlPBuffer<CR>
 
-map <F8> : !gcc % && ./a.out <CR>
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-au BufNewFile,BufRead *.css.ejs set filetype=css
-au BufNewFile,BufRead *.js.ejs set filetype=javascript
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Define Enabled checkers
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+
+let g:syntastic_php_phpcs_exec = '~/.composer/vendor/bin/phpcs'
+let g:syntastic_php_phpmd_exec = '~/.composer/vendor/bin/phpmd'
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
