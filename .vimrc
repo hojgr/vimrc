@@ -1,3 +1,14 @@
+" !!! For PHPCS and PHPMD to work,
+" both must be installed via composer
+" - composer global require phpmd/phpmd
+" - composer global require "squizlabs/php_codesniffer=*"
+
+" vim-fugitive (and probably some other plugins)
+" are not compatible with FISH shell
+" this fixes it
+set shell=/bin/bash
+
+
 " Set MapLeader
 let mapleader=","
 
@@ -16,12 +27,29 @@ Plug 'tpope/vim-fugitive'       " Git Suppoer
 Plug 'Lokaltog/vim-easymotion'  " Easymotion (,,move)
 Plug 'mileszs/ack.vim'
 Plug 'mhinz/vim-signify'
+Plug 'mattn/emmet-vim'
 
 " Plugins for Snippets and automatic autocompletion
 Plug 'ervandew/supertab'
+
+" !!! YCM must be compiled before use. @see https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64-super-quick-installation
 Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" For Session persistance
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+
+" PHPUnit impl
+Plug 'joonty/vim-phpunitqf'
+
+" GOLang
+Plug 'fatih/vim-go'
+
+" Tag bar
+Plug 'majutsushi/tagbar'
+Plug 'garyburd/go-explorer'
 
 call plug#end()
 
@@ -84,3 +112,17 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+
+" vim-go tags
+nmap <F8> :TagbarToggle<CR>
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
