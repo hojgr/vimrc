@@ -16,7 +16,7 @@ set t_Co=256
 
 set nocompatible              " be iMproved, required
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/syntastic'     " Syntax checker, PHPCS, PHPMD
 Plug 'tomasr/molokai'           " Colorscheme
