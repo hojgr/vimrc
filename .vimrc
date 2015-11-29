@@ -1,4 +1,3 @@
-
 " !!! For PHPCS and PHPMD to work,
 " both must be installed via composer
 " - composer global require phpmd/phpmd
@@ -19,6 +18,7 @@ set nocompatible              " be iMproved, required
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'     " Syntax checker, PHPCS, PHPMD
 Plug 'tomasr/molokai'           " Colorscheme
 Plug 'kien/ctrlp.vim'           " CtrlP File finder
@@ -45,6 +45,7 @@ Plug 'xolox/vim-session'
 
 " PHPUnit impl
 Plug 'joonty/vim-phpunitqf'
+Plug 'nishigori/vim-phpunit-snippets'
 
 " GOLang
 Plug 'fatih/vim-go'
@@ -52,6 +53,13 @@ Plug 'fatih/vim-go'
 " Tag bar
 Plug 'majutsushi/tagbar'
 Plug 'garyburd/go-explorer'
+
+" ELIXIR
+Plug 'elixir-lang/vim-elixir'
+Plug 'mattreduce/vim-mix'
+
+" handlebars
+Plug 'mustache/vim-mustache-handlebars'
 
 call plug#end()
 
@@ -145,10 +153,9 @@ set hidden
 set wildmenu " better command line completion
 set hlsearch " highlight searches 
 
-filetype indent off
 set autoindent
-set nocindent
 
 set tabstop=4
 set shiftwidth=4
+
 " set expandtab
